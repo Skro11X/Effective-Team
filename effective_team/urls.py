@@ -1,5 +1,5 @@
 from django.urls import path
-from EffectiveTeam.views import CreatorAPIView, TeamAPIView, MemberAPIView, TeamApplicationAPIView, RotateScoreAPIView
+from effective_team.views import CreatorAPIView, TeamAPIView, MemberAPIView, TeamApplicationAPIView, RotateScoreAPIView
 from drf_spectacular.views import SpectacularSwaggerView, SpectacularAPIView
 
 

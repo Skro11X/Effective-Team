@@ -1,5 +1,5 @@
 from django.contrib import admin
-from EffectiveTeam.models import Member
+from effective_team.models import Member
 
 
 @admin.register(Member)

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'EffectiveTeam.apps.EffectiveteamConfig',
+    'effective_team.apps.EffectiveteamConfig',
     'rest_framework',
     'drf_spectacular',
 ]
@@ -68,7 +68,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'EffectiveProj.urls'
+ROOT_URLCONF = 'effective_proj.urls'
 
 TEMPLATES = [
     {
@@ -87,7 +87,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'EffectiveProj.wsgi.application'
+WSGI_APPLICATION = 'effective_proj.wsgi.application'
 
 
 # Database

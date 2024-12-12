@@ -97,10 +97,8 @@ DATABASES = {
         'NAME':  str(os.getenv("POSTGRES_DB")),
         'USER': str(os.getenv("POSTGRES_USER")),
         'PASSWORD': str(os.getenv("POSTGRES_PASSWORD")),
-        #when open as pro Windows computer--->
-        'HOST': os.getenv("TEST_HOST"),# or just '127.0.0.1',
-        # when initialize docker-compose
-        #'HOST': os.getenv("HOST"),#'127.0.0.1',
+        #when open at Windows computer do  $Env:HOST = "127.0.0.1" command in terminal
+        'HOST': os.getenv("HOST"),#'127.0.0.1',
         'PORT': str(os.getenv("SQL_PORT")),
     }
 }

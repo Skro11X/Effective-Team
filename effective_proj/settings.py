@@ -11,9 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-# from dotenv import load_dotenv
-# import os
-# load_dotenv()
+from os.path import join, dirname
+from dotenv import load_dotenv
+import os
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -26,10 +27,7 @@ SECRET_KEY = 'django-insecure--*k!+!1%57dyw5uvatzn8f(1mcm#m95r904prp#fr2&k=(=a_j
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -95,18 +93,15 @@ WSGI_APPLICATION = 'effective_proj.wsgi.application'
 
 DATABASES = {
     'default': {
-        # "ENGINE": str(os.getenv("SQL_ENGINE")),
-        # "NAME": str(os.getenv("SQL_DATABASE")),
-        # "USER": str(os.getenv("SQL_USER")),
-        # "PASSWORD": str(os.getenv("SQL_PASSWORD")),
-        # "HOST": str(os.getenv("SQL_HOST")),
-        # "PORT": str(os.getenv("SQL_PORT")),
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'effectiveteam',
-        'USER': 'wbadmin',
-        'PASSWORD': 'wbadmin',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'ENGINE': str(os.getenv("SQL_ENGINE")),
+        'NAME':  str(os.getenv("POSTGRES_DB")),
+        'USER': str(os.getenv("POSTGRES_USER")),
+        'PASSWORD': str(os.getenv("POSTGRES_PASSWORD")),
+        #when open as pro Windows computer--->
+        'HOST': os.getenv("TEST_HOST"),# or just '127.0.0.1',
+        # when initialize docker-compose
+        #'HOST': os.getenv("HOST"),#'127.0.0.1',
+        'PORT': str(os.getenv("SQL_PORT")),
     }
 }
 

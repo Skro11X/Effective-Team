@@ -1,4 +1,6 @@
 from rest_framework import serializers
+from rest_framework.exceptions import ValidationError
+
 from .models import *
 
 class CreatorSerializer(serializers.ModelSerializer):
@@ -25,8 +27,14 @@ class TeamApplicationSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-
 class RotateScoreSerializer(serializers.Serializer):
-    creator_from = serializers.IntegerField()
-    creator_to = serializers.IntegerField()
+    creator_from = serializers.PrimaryKeyRelatedField(queryset=Creator.objects.all())
+    creator_to = serializers.PrimaryKeyRelatedField(queryset=Creator.objects.all())
     score = serializers.IntegerField()
+
+    def validate(self, data):
+        creator_from = data['creator_from']
+        score = data['score']
+        if creator_from.score - score < 0:
+            raise ValidationError({'error': f'{creator_from.name} not enough score'})
+        return data

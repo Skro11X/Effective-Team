@@ -5,7 +5,7 @@ from effective_team.serializers import TeamApplicationSerializer
 
 class TeamApplicationViewSet(viewsets.ModelViewSet):
     '''
-     CRUD realization for model Creator
+     CRUD realization for model TeamApplication
     '''
     queryset = TeamApplication.objects.all()
     serializer_class = TeamApplicationSerializer

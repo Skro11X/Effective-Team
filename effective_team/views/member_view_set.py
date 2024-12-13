@@ -5,7 +5,7 @@ from effective_team.serializers import MemberSerializer
 
 class MemberViewSet(viewsets.ModelViewSet):
     '''
-     CRUD realization for model Creator
+     CRUD realization for model Member
     '''
     queryset = Member.objects.all()
     serializer_class = MemberSerializer

@@ -20,13 +20,13 @@
 
 ### Представления 
 
-Ответы на запросы к серверу реализованны с помощью наследования от классов rest_framework.generics DRF. [Ссылка на представленя](effective_team/views)
+Ответы на запросы к серверу реализованны с помощью наследования от классов rest_framework.viewset DRF. [Ссылка на представления](effective_team/views)
 
-Для модели [`TeamApplication`](effective_team/models.py) реализован класс [`TeamApplicationAPIView`](effective_team/views/team_aplication.py) с  логикой вывода списком. Список отсортирован по полю endurance и ограничен по количеству в 10 выводимых записей.
+Для модели [`TeamApplication`](effective_team/models.py) реализован класс [`TeamApplicationViewSet`](effective_team/views/team_aplication_view_set.py), осуществляющий вывод списка отсортированного по полю endurance и ограничивающий количество записей до 10. Также можно обращаться с помощью `id` к конкретной записи.
 
-К моделям [`Creator`](effective_team/models.py), [`Team`](effective_team/models.py), [`Member`](effective_team/models.py) производится обращение к конкретному элементу с помощью указания id в адресе. Для них реализованны соответсвующие представления [`CreatorAPIView`](effective_team/views/creator.py), [`TeamAPIView`](effective_team/views/team.py), [`MemberAPIView`](effective_team/views/member.py).
+К моделям [`Creator`](effective_team/models.py), [`Team`](effective_team/models.py), [`Member`](effective_team/models.py) производится обращение без условий и ограничений(есть логика просмотра списка и каждого элемнта отдельно). Для них реализованны соответсвующее представления [`CreatorViewSet`](effective_team/views/creator_view_set.py), [`TeamViewSet`](effective_team/views/team_view_set.py), [`MemberViewSet`](effective_team/views/member_view_set.py).
 
-Так же с помощью [RotateScoreAPIView](effective_team/views/rotate_score.py) реализована передача баллов создателя команды. Данное представление обрабатывает только `POST` запрос. Обращается к телу запроса достает из него по ключам `creator_from`, `creator_to` - значения `id` двух создателей команды, между которыми нужно произвести перевод. Так же ищет в теле ключ `score`, чтобы понять на какую сумму нужно сделать перевод.
+Так же с помощью [RotateScoreAPIView](effective_team/views/rotate_score.py) сделана передача баллов между создателями команды. Данное представление обрабатывает только `POST` запрос. Обращается к телу запроса достает из него по ключам `creator_from`, `creator_to` - значения `id` двух создателей команды, между которыми нужно произвести перевод. Так же ищет в теле ключ `score` , чтобы понять на какую сумму нужно сделать перевод.
 Внутри производится проверка на возможность перевода
 
 Пример запроса:
@@ -47,14 +47,18 @@
 
 ### Эндпоинты
 
-| HTTP-метод                | Эндпоинт             | Описание                           |
-|---------------------------|----------------------|------------------------------------|
-| GET,POST,PUT/PATCH,DELETE | `/creator/<int:pk>/` | Обращение к модели Creator         | 
-| GET,POST,PUT/PATCH,DELETE | `/member/<int:pk>/`  | Обращение к модели Member          | 
-| GET,POST,PUT/PATCH,DELETE | `/team/<int:pk>/`    | Обращение к модели Team            | 
-| GET,POST,PUT/PATCH,DELETE | `/team_application/` | Обращение к модели TeamApplication | 
-| POST                      | `/rotate_score`      | Сделать перевод score              | 
-| GET                       | `/shema/swagger-ui/` | Ссылка на схему к API              |
+| HTTP-метод                | Эндпоинт                     | Описание                                         |
+|---------------------------|------------------------------|--------------------------------------------------|
+| GET                       | `/creator/`                  | Список Creator                                   |
+| GET,POST,PUT/PATCH,DELETE | `/creator/<int:pk>/`         | Обращение к конкретному элементу Creator         | 
+| GET                       | `/member/`                   | Список Member                                    |
+| GET,POST,PUT/PATCH,DELETE | `/member/<int:pk>/`          | Обращение к конкретному элементу Member          | 
+| GET                       | `/team/`                     | Список Team                                      |
+| GET,POST,PUT/PATCH,DELETE | `/team/<int:pk>/`            | Обращение к конкретному элементу Team            | 
+| GET                       | `/team_application/`         | Список TeamApplication                           |
+| GET,POST,PUT/PATCH,DELETE | `/team_application/<int:pk>` | Обращение к конкретному элементу TeamApplication | 
+| POST                      | `/rotate_score/`             | Сделать перевод score                            | 
+| GET                       | `/shema/swagger-ui/`         | Ссылка на схему к API                            |
     
 
 [Файл с эндпоинтами](effective_team/urls.py)
